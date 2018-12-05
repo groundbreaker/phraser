@@ -1,4 +1,4 @@
-# phraser :speech_balloon:
+# :speech_balloon: phraser
 
 [![GoDoc](https://godoc.org/github.com/groundbreaker/phraser?status.svg)](https://godoc.org/github.com/groundbreaker/phraser)
 
