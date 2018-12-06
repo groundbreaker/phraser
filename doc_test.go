@@ -11,3 +11,8 @@ func Example() {
 	phrase := p.GeneratePhrase()
 	fmt.Println(phrase.Passphrase())
 }
+
+func ExampleParseWordList() {
+	phraser.ParseWordList("/path/to/words")
+	// Output: []string{"people", "humans","robots", "droids"}
+}
