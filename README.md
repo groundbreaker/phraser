@@ -21,10 +21,8 @@ import (
 )
 
 func main() {
-  p := phraser.New("path/to/adjectives", "path/to/nouns")
+  p := phraser.New()
   phrase := p.GeneratePhrase()
-  passphrase phrase.Passphrase()
-
-  fmt.Println(passphrase)
+  fmt.Println(phrase.Passphrase())
 }
 ```

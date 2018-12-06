@@ -1,44 +1,22 @@
-// Package phraser generates human readable passphrases from customizable word
-// lists. These passphrases are great for use as temporary passwords or
-// whenever you need a set of user-friendly random words.
 package phraser
 
 import (
 	"fmt"
-	"io/ioutil"
 	"math/rand"
 	"strings"
-	"time"
 )
 
-// VERSION returns the SemVer for Package phraser.
-const VERSION = "v1.0.0"
+// DefaultSymbol will be used when making Phrases.
+var DefaultSymbol = "!"
 
-var (
-	// DefaultSymbol will be used when making Phrases.
-	DefaultSymbol = "!"
-)
-
-// ParseWordList reads the words from the given path to a word list file. It
-// returns a slice containing the words found in that file.
-//
-// A word list should just be a plain text file with one word per line.
-func ParseWordList(path string) []string {
-	bytes, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
-	words := strings.Split(string(bytes), "\n")
-	return words[:len(words)-1]
-}
-
-// New returns a new instance of Phraser. Requires the paths to each word
-// list it needs to Adjectives and Nouns.
-func New(adjPath string, nounPath string) *Phraser {
+// New returns a new instance of Phraser using the DefaultAdjectives and
+// DefaultNouns. You can override these exported vars before calling New() to
+// use your own word list.
+func New() *Phraser {
 	return &Phraser{
-		Adjectives: ParseWordList(adjPath),
-		Nouns:      ParseWordList(nounPath),
-		RNG:        rand.New(rand.NewSource(time.Now().Unix())),
+		Adjectives: DefaultAdjectives,
+		Nouns:      DefaultNouns,
+		RNG:        NewRNG(),
 	}
 }
 
@@ -50,24 +28,19 @@ type Phraser struct {
 	RNG        *rand.Rand
 }
 
-// GeneratePhrase genereates and returns a new phrase
+// GeneratePhrase genereates and returns a new Phrase.
 func (phraser *Phraser) GeneratePhrase() *Phrase {
 	return &Phrase{
-		Adjective: phraser.RandomAdjective(),
+		Adjective: phraser.RandomWord(phraser.Adjectives),
 		Number:    phraser.RNG.Intn(99),
-		Noun:      phraser.RandomNoun(),
+		Noun:      phraser.RandomWord(phraser.Nouns),
 		Symbol:    DefaultSymbol,
 	}
 }
 
-// RandomAdjective returns a random word from the Adjectives list.
-func (phraser *Phraser) RandomAdjective() string {
-	return phraser.Adjectives[phraser.RNG.Intn(len(phraser.Adjectives))]
-}
-
-// RandomNoun returns a random word from the Nouns list.
-func (phraser *Phraser) RandomNoun() string {
-	return phraser.Nouns[phraser.RNG.Intn(len(phraser.Nouns))]
+// RandomWord returns a random word from the given list.
+func (phraser *Phraser) RandomWord(words []string) string {
+	return words[phraser.RNG.Intn(len(words))]
 }
 
 // Phrase contains the phrase parts and the ability to concatentate the parts
@@ -79,7 +52,8 @@ type Phrase struct {
 	Symbol    string
 }
 
-// Passphrase contcatenates the phrase parts and returns a passphrase.
+// Passphrase contcatenates the phrase parts and returns a passphrase in the
+// form of: AdjectiveNumberNounSymbol, e.g. "Amiable42Robots!".
 func (phrase *Phrase) Passphrase() string {
 	return fmt.Sprintf("%s%v%s%s", strings.Title(phrase.Adjective), phrase.Number, strings.Title(phrase.Noun), phrase.Symbol)
 }
