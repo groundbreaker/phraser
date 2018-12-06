@@ -7,7 +7,7 @@ import (
 )
 
 func (suite *PhraserTestSuite) TestParseWordList() {
-	suite.Equal(suite.Adjectives, phraser.ParseWordList("_test/wordlist"), "it returns the correct words")
+	suite.Equal(suite.Adjectives, phraser.ParseWordList("testwords"), "it returns the correct words")
 }
 
 func (suite *PhraserTestSuite) TestNewRNG() {

@@ -10,6 +10,14 @@
   version = "v1.1.1"
 
 [[projects]]
+  branch = "master"
+  digest = "1:1301c859d3d63a17013b1b5abb1288329c830396e6337ed463b1e18e3876d445"
+  name = "github.com/groundbreaker/phraser"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "03b906478286f926dfb2910535dcc097187045eb"
+
+[[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
@@ -32,6 +40,9 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/stretchr/testify/suite"]
+  input-imports = [
+    "github.com/groundbreaker/phraser",
+    "github.com/stretchr/testify/suite",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
