@@ -49,6 +49,14 @@ func (suite *PhraserTestSuite) TestPassphrase() {
 	suite.Equal("Amiable42Robots?", suite.Phrase.Passphrase(), "it returns the correct passphrase")
 }
 
+func (suite *PhraserTestSuite) TestParseWordList() {
+	suite.Equal(suite.Adjectives, phraser.ParseWordList("testwords"), "it returns the correct words")
+}
+
+func (suite *PhraserTestSuite) TestNewRNG() {
+	suite.IsType(&rand.Rand{}, phraser.NewRNG(), "it returns an instance of rand.Rand")
+}
+
 func TestPhraserTestSuite(t *testing.T) {
 	suite.Run(t, new(PhraserTestSuite))
 }
