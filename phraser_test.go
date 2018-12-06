@@ -50,7 +50,7 @@ func (suite *PhraserTestSuite) TestPassphrase() {
 }
 
 func (suite *PhraserTestSuite) TestParseWordList() {
-	suite.Equal(suite.Adjectives, phraser.ParseWordList("testwords"), "it returns the correct words")
+	suite.Equal(suite.Adjectives, phraser.ParseWordList("words.txt"), "it returns the correct words")
 }
 
 func (suite *PhraserTestSuite) TestNewRNG() {
