@@ -6,9 +6,6 @@ import (
 	"strings"
 )
 
-// DefaultSymbol will be used when making Phrases.
-var DefaultSymbol = "!"
-
 // New returns a new instance of Phraser using the DefaultAdjectives and
 // DefaultNouns. You can override these exported vars before calling New() to
 // use your own word list.
