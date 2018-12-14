@@ -6,7 +6,7 @@ default:
 
 # init project
 init:
-	@ dep ensure
+	@ go mod vendor
 
 # run tests
 test:
