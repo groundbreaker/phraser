@@ -4,7 +4,7 @@
 package phraser
 
 // VERSION returns the SemVer for Package phraser.
-const VERSION = "v1.0.0"
+const VERSION = "v1.0.1"
 
 // DefaultSymbol will be used when making Phrases.
 var DefaultSymbol = "!"

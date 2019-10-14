@@ -72,5 +72,5 @@ func ParseWordList(path string) []string {
 
 // NewRNG returns a newly seeded random number generator.
 func NewRNG() *rand.Rand {
-	return rand.New(rand.NewSource(time.Now().Unix()))
+	return rand.New(rand.NewSource(time.Now().UnixNano()))
 }

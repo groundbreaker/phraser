@@ -15,7 +15,7 @@ test:
 # create release VERSION on github
 #
 # VERSION should being with a v and be in SemVer format.
-release:
+release: test
 	$(eval VERSION=$(filter-out $@, $(MAKECMDGOALS)))
 	$(if ${VERSION},@true,$(error "VERSION is required"))
 	git commit --allow-empty -am ${VERSION}
